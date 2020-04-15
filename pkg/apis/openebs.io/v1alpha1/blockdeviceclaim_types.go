@@ -47,7 +47,8 @@ type DeviceClaimSpec struct {
 	// DeviceType represents the type of drive like SSD, HDD etc.,
 	DeviceType string `json:"deviceType"`
 
-	// HostName from where blockdevice has to be claimed.
+	// Host name from where blockdevice has to be claimed.
+	// TODO @akhilerm to be deprecated. Use NodeAttributes.HostName instead
 	HostName string `json:"hostName"`
 
 	// Details of the device to be claimed

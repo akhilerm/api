@@ -49,7 +49,7 @@ type DeviceSpec struct {
 	// Details contain static attributes of BD like model,serial, and so forth
 	Details DeviceDetails `json:"details"`
 
-	// Reference to the BDC which has claimed this BD
+	// ClaimRef is the reference to the BDC which has claimed this BD
 	ClaimRef *v1.ObjectReference `json:"claimRef,omitempty"`
 
 	// DevLinks contains soft links of a block device like
@@ -60,12 +60,12 @@ type DeviceSpec struct {
 	// FileSystem contains mountpoint and filesystem type
 	FileSystem FileSystemInfo `json:"filesystem,omitempty"`
 
-	// Partitioned represents if BlockDevice has partions or not (YES/NO)
-	// Currently always default to NO.
+	// Partitioned represents if BlockDevice has partitions or not (Yes/No)
+	// Currently always default to No.
 	// TODO @kmova to be implemented/deprecated
 	Partitioned string `json:"partitioned"`
 
-	// ParentDevice was intented to store the UUID of the parent
+	// ParentDevice was intended to store the UUID of the parent
 	// Block Device as is the case for partitioned block devices.
 	//
 	// For example:
@@ -99,7 +99,7 @@ type DeviceSpec struct {
 // based on node attributes.  Also, adding this in the spec allows for
 // displaying in node name in the `kubectl get bd`
 //
-// TODO  @kmova @akhil
+// TODO  @kmova @akhilerm
 // Capture and add nodeUUID to BD, that can help in determining
 // if the node was recreated with same node name.
 type NodeAttribute struct {
@@ -142,7 +142,7 @@ type DeviceDetails struct {
 	// Model is model of disk
 	Model string `json:"model"`
 
-	// Compliance is standards/specifications version implmented by device firmware
+	// Compliance is standards/specifications version implemented by device firmware
 	//  such as SPC-1, SPC-2, etc
 	Compliance string `json:"compliance"`
 
@@ -152,7 +152,7 @@ type DeviceDetails struct {
 	// Vendor is vendor of disk
 	Vendor string `json:"vendor"`
 
-	// disk firmware revision
+	// FirmwareRevision is the disk firmware revision
 	FirmwareRevision string `json:"firmwareRevision"`
 }
 
@@ -165,18 +165,18 @@ type FileSystemInfo struct {
 	Mountpoint string `json:"mountPoint,omitempty"`
 }
 
-// DeviceDevLink holds the maping between type and links like by-id type or by-path type link
+// DeviceDevLink holds the mapping between type and links like by-id type or by-path type link
 type DeviceDevLink struct {
 	// Kind is the type of link like by-id or by-path.
 	Kind string `json:"kind,omitempty"`
 
-	// Links are the soft links of Type type
+	// Links are the soft links
 	Links []string `json:"links,omitempty"`
 }
 
 // DeviceStatus defines the observed state of BlockDevice
 type DeviceStatus struct {
-	// claim state of the block device
+	// ClaimState represents the claim state of the block device
 	ClaimState DeviceClaimState `json:"claimState"`
 
 	// State is the current state of the blockdevice (Active/Inactive)
